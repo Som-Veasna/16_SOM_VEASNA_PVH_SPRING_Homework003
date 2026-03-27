@@ -29,7 +29,6 @@ public class VenueServiceImpl implements VenueService {
 
         return venueRepository.saveVenue(venueDTO);
     }
-
     @Override
     public Venues updateVenueById(Integer id, VenueDTO venueDTO) {
         return venueRepository.updateVenueById(id, venueDTO);
