@@ -35,12 +35,7 @@ insert into attendees (attendee_name, email) values (#{attendee.attendeeName},#{
      Attendees updateAttendeeById(Integer attendeeId, @Param("attendee") AttendeeDTO attendeeDTO);
     @Select("""
      SELECT
-            a.attendee_id,
-            a.attendee_name,
-            a.email,
-            e.event_id,
-            e.event_name,
-            e.event_date
+            a.attendee_id,a.attendee_name, a.email,e.event_id,e.event_name,e.event_date
         FROM attendees a
         INNER JOIN event_attendee ea ON a.attendee_id = ea.attendee_id
         INNER JOIN events e          ON ea.event_id   = e.event_id
@@ -48,6 +43,12 @@ insert into attendees (attendee_name, email) values (#{attendee.attendeeName},#{
         """)
     @ResultMap("attendeeMapper")
     List<Attendees> getAllAttendeeByEventId(Integer eventId);
+    @Select("SELECT * FROM attendees WHERE email = #{email}")
+    @ResultMap("attendeeMapper")
+    Attendees getAttendeeByEmail(String email);
+    @Select("SELECT * FROM attendees WHERE attendee_name = #{attendeeName}")
+    @ResultMap("attendeeMapper")
+    Attendees getAttendeeByName(String attendeeName);
 }
 
 
