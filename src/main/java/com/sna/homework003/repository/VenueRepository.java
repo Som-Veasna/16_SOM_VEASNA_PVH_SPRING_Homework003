@@ -34,4 +34,16 @@ update venues set venue_name = #{venue.venueName}, location = #{venue.location} 
     @ResultMap("venueMapper")
      Venues updateVenueById(Integer id, @Param("venue") VenueDTO venueDTO);
 
+    @Select("SELECT * FROM venues WHERE venue_name = #{venueName}")
+    @ResultMap("venueMapper")
+    Venues getVenueByName(String venueName);
+    @Select("SELECT * FROM venues WHERE location = #{location}")
+    @ResultMap("venueMapper")
+    Venues getVenueByLocation(String location);
+
+
+
+
+
 }
+
