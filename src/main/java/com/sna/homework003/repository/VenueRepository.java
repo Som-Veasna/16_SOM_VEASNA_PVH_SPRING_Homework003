@@ -13,9 +13,10 @@ public interface VenueRepository {
             @Result(property = "venueName",column = "venue_name")
     })
     @Select("""
-select * from venues
+select * from venues order by venue_id asc  offset #{size} *(#{page}-1)
+                                                         limit #{size}\s;
 """)
-    List<Venues> getAllVenues();
+    List<Venues> getAllVenues(Integer size,Integer page);
 
      @Select("""
      select * from venues where venue_id = #{venueId}
@@ -40,6 +41,12 @@ update venues set venue_name = #{venue.venueName}, location = #{venue.location} 
     @Select("SELECT * FROM venues WHERE location = #{location}")
     @ResultMap("venueMapper")
     Venues getVenueByLocation(String location);
+
+    @Delete("""
+delete from venues where venue_id = #{venueId}
+""")
+    void deleteVenueById(Integer venueId);
+
 
 
 

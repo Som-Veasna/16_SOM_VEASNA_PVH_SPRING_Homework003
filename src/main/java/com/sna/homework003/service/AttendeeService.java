@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface AttendeeService{
-    List<Attendees> getAllAttendees();
+    List<Attendees> getAllAttendees(Integer size,Integer page);
     Attendees getAttendeeById(Integer id);
     Attendees saveAttendee(AttendeeDTO attendee);
     Attendees updateAttendee(Integer attendeeId,AttendeeDTO attendee);
     List<Attendees> getAllAttendeesByEventId(Integer eventId);
+    void deleteAttendeeByEventId(Integer eventId);
 }

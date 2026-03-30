@@ -14,9 +14,10 @@ public interface AttendeeRepository {
             @Result(property = "attendeeName",column = "attendee_name")
     })
     @Select("""
-select * from attendees
+select * from attendees order by attendee_id asc  offset #{size} *(#{page}-1)
+                                                         limit #{size}\s;
 """)
-    List<Attendees> getAllAttendees();
+    List<Attendees> getAllAttendees(Integer size,Integer page);
 
     @Select("""
 select * from attendees where attendee_id = #{attendeeId}
@@ -49,6 +50,15 @@ insert into attendees (attendee_name, email) values (#{attendee.attendeeName},#{
     @Select("SELECT * FROM attendees WHERE attendee_name = #{attendeeName}")
     @ResultMap("attendeeMapper")
     Attendees getAttendeeByName(String attendeeName);
+    @Delete("""
+
+    delete from attendees where attendee_id = #{attendeeId}
+
+""")
+    void deleteAttendeeById(Integer attendeeId);
+
+
+
 }
 
 
