@@ -17,8 +17,8 @@ public class VenueServiceImpl implements VenueService {
     private final VenueRepository venueRepository;
 
     @Override
-    public List<Venues> getAllVenues() {
-        return venueRepository.getAllVenues();
+    public List<Venues> getAllVenues(Integer size, Integer page) {
+        return venueRepository.getAllVenues(size, page);
     }
 
     @Override
@@ -47,4 +47,12 @@ public class VenueServiceImpl implements VenueService {
         }
         return venueRepository.updateVenueById(id, venueDTO);
     }
+
+    @Override
+    public void deleteVenueById(Integer id) {
+        getVenueById(id);
+        venueRepository.deleteVenueById(id);
+    }
+
+
 }

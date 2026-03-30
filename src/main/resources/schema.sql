@@ -41,3 +41,20 @@ CREATE TABLE event_attendee (
                                         ON DELETE RESTRICT
                                         ON UPDATE CASCADE
 );
+
+ALTER TABLE event_attendee
+    DROP CONSTRAINT IF EXISTS fk_event_attendee_event,
+    DROP CONSTRAINT IF EXISTS fk_event_attendee_attendee;
+
+ALTER TABLE event_attendee
+    ADD CONSTRAINT fk_event_attendee_event
+        FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
+    ADD CONSTRAINT fk_event_attendee_attendee
+        FOREIGN KEY (attendee_id) REFERENCES attendees(attendee_id) ON DELETE CASCADE;
+
+ALTER TABLE events
+    DROP CONSTRAINT IF EXISTS fk_events_venue;
+
+ALTER TABLE events
+    ADD CONSTRAINT fk_events_venue
+        FOREIGN KEY (venue_id) REFERENCES venues(venue_id) ON DELETE CASCADE;

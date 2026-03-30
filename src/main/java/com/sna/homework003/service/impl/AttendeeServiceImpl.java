@@ -16,8 +16,8 @@ import java.util.List;
 public class AttendeeServiceImpl implements AttendeeService {
     private final AttendeeRepository attendeeRepository;
     @Override
-    public List<Attendees> getAllAttendees() {
-        return attendeeRepository.getAllAttendees();
+    public List<Attendees> getAllAttendees(Integer size,Integer page) {
+        return attendeeRepository.getAllAttendees(size,page);
     }
 
     @Override
@@ -59,5 +59,11 @@ public class AttendeeServiceImpl implements AttendeeService {
     @Override
     public List<Attendees> getAllAttendeesByEventId(Integer eventId) {
         return attendeeRepository.getAllAttendeeByEventId(eventId);
+    }
+
+    @Override
+    public void deleteAttendeeByEventId(Integer eventId) {
+        getAttendeeById(eventId);
+        attendeeRepository.deleteAttendeeById(eventId);
     }
 }
